@@ -1,26 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-import NavBar from './components/NavBar';
-import Contador from './components/Contador';
-
-
-const App = () => {
-  
-
-  
-  return(
-    
-  <>
-  <NavBar/>
-  <h1>Hola soy el componente Contador</h1>
-  
-  <Contador stock={10} initial={1}/>
-  
-  </>
-  
-  )
-  
-  }
-
-
-export default App;
+import React from 'react';
+import './style.css';
+import Nav from './components/NavBar';
+import ItemListContainer from './components/ItemListContainer';
+import ItemDetailContainer from './components/ItemDetailContainer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<ItemListContainer />} />
+        <Route path="/categoria/:id" element={<ItemListContainer />} />
+        <Route path="/detalle/:id" element={<ItemDetailContainer />} />
+        <Route />
+      </Routes>
+    </BrowserRouter>
+  );
+}
