@@ -1,21 +1,30 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { data } from '../mocks/mockData';
-import ItemDetail from './ItemDetail';
 
-const ItemDetailContainer = () => {
-  const [detalle, setDetalle] = useState({});
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import { data } from '../mocks/mockData'
+import ItemDetail from './ItemDetail'
+import { useParams } from 'react-router-dom';
 
-  useEffect(() => {
-    data
-      .then((res) => setDetalle(res.find((prod) => prod.id === '01')))
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+const ItemDetailCointener = () => {
 
-  return <ItemDetail detalle={detalle} />;
-};
+const [productDetail, setProductDetail]= useState({});
+const [loading, setLoading]= useState(true);
+const {id} = useParams();
 
-export default ItemDetailContainer;
+useEffect (()=>{
+
+data
+.then((res)=> setProductDetail(res.find((item)=>item.id === id)))
+.catch ((error)=> console.log(error))
+.finally(()=> setLoading(false))
+console.log ('detalle', productDetail)
+},[])
+
+return (
+    <div>
+       {loading ? <p>Cargando...</p> : <ItemDetail productDetail={productDetail}/>}
+    </div>
+  )
+}
+
+export default ItemDetailCointener

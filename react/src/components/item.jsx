@@ -1,17 +1,30 @@
-import React from 'react';
+import React from "react";
 
-const Item = ({ producto }) => {
-  return (
-    <div className="card" style={{ width: '18rem' }}>
-      <img src={producto.img} className="card-img-top" alt="..." />
-      <div className="card-body">
-        <h5 className="card-title">{producto.name}</h5>
-        <p className="card-text">{producto.description}</p>
-        <p className="card-text"> ${producto.price}</p>
-        <button className="btn btn-primary">Ver Mas</button>
-      </div>
-    </div>
-  );
-};
+import { Link, useNavigate } from 'react-router-dom';
 
-export default Item;
+const Item = ({product}) => {
+
+    const{id, img, name, description, price, stock}=product
+    const navegar = useNavigate()
+
+    return (
+
+<div className="card" style={{width:'20rem',margin:'.5rem'}}>
+
+         <img src={img} className="card-img-top" alt={name}/>
+        <div className="card-body">
+
+        <p className="card-text">{product.id}</p>
+        <p className="card-text">{product.name}</p>
+        <p className="card-text">${product.price}</p>
+        <p className="card-text">{product.stock}</p>
+        <p className="card-text">{product.description}</p>
+
+        </div>
+        <button onClick={()=>navegar(`/detail/${id}`)}>ver mas</button>
+        
+</div>   
+    )
+}
+
+export default Item

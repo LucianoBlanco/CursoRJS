@@ -1,22 +1,50 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { data } from '../mocks/mockData';
-import ItemList from './ItemList';
+import React, {useEffect, useState}from 'react'
 
-const ItemListContainer = () => {
-  const [lista, setLista] = useState([]);
-  const [loading, setLoading] = useState(true);
+import ItemList from './ItemList'
 
-  useEffect(() => {
-    data
-      .then((response) => setLista(response))
-      .catch((error) => console.log(error))
-      .finally(() => setLoading(false));
-  }, []);
+import {data} from '../mocks/mockData'
 
+
+const ItemListContainer = (props) => {
+
+   
+  const [listProducts, setListProducts]= useState([])
+  const[loading, setLoading]=useState(false)
+  const{saludo, greeting} = props
+  
+
+
+
+  
+  useEffect(()=>{
+
+    
+      setLoading (true)
+      data
+      .then((res)=>setListProducts(res))
+      .catch((error)=> console.log(error))
+      .finally(()=>setLoading(false))
+
+
+  },[])
+  
+  console.log (listProducts)
+  
+  
+  
   return (
-    <div>{loading ? <p>Cargando data...</p> : <ItemList lista={lista} />}</div>
-  );
-};
+    
+    
+    <div style={{marginTop: "5px", border: "solid 2px black"}}>
+    
+    
+    
+    <p>{saludo}</p>
+    <p>{greeting}</p>
+  
+      {loading ? <p>Cargando...</p>:<ItemList listProducts={listProducts}/>}
+    </div>
+  )
+}
 
-export default ItemListContainer;
+export default ItemListContainer

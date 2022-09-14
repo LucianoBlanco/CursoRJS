@@ -1,21 +1,19 @@
-import React from 'react';
-import Item from './Item';
+import React from "react";
+import Item from "./Item";
 
-const ItemList = ({ lista }) => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-      }}
-    >
-      {lista.map((producto) => (
-        <Item key={producto.id} producto={producto} />
-      ))}
-    </div>
-  );
-};
+const ItemList = ({listProducts}) => {
 
-export default ItemList;
+    return (
+
+        <div className="cardContainer">
+
+{listProducts.map (product=> <Item
+key={product.id} 
+product={product}/>)}
+
+
+        </div>  
+    )
+}
+
+export default ItemList
